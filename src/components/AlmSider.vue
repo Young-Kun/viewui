@@ -24,7 +24,7 @@
             <Submenu name="2">
                 <template slot="title">
                     <Icon type="ios-people"/>
-                    <span>用户管理dddddddddddddddddddddd</span>
+                    <span>用户管理</span>
                 </template>
                 <MenuItem name="2-1">新增用户</MenuItem>
                 <MenuItem name="2-2">活跃用户</MenuItem>
@@ -77,10 +77,15 @@
 
     .menu {
         display: flex;
+        flex: none;
         flex-flow: column nowrap;
-        transition: all 1s ease-in-out;
         overflow-y: auto;
         height: calc(100vh - 64px);
+    }
+
+    .menu li {
+        white-space: nowrap;
+        overflow: hidden;
     }
 
     .menu::-webkit-scrollbar {
@@ -102,7 +107,7 @@
     .menu span {
         display: inline-block;
         overflow: hidden;
-        width: 69px;
+        width: 70px;
         text-overflow: ellipsis;
         white-space: nowrap;
         vertical-align: bottom;
