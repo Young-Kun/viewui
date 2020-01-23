@@ -43,7 +43,7 @@
     .layout-inside {
         overflow-x: hidden;
         min-height: 100vh;
-        padding-left: 300px;
+        padding-left: 200px;
     }
 
     .layout-content {
