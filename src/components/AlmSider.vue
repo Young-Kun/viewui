@@ -5,15 +5,17 @@
             :collapsed-width="78"
             v-model="isCollapsed"
     >
-        <div class="logo">
+        <!--LOGO-->
+        <div class="logo" :style="{fontSize: isCollapsed?'xx-large':'x-large'}">
             <Icon type="logo-xbox"/>
-            <span>LOGO</span>
+            <span v-show="!isCollapsed">LOGO</span>
         </div>
-        <Menu theme="dark" width="auto" accordion>
+        <!--侧边导航菜单：展开时候-->
+        <Menu theme="dark" width="auto" accordion class="menu" v-if="!isCollapsed">
             <Submenu name="1">
                 <template slot="title">
-                    <Icon type="ios-paper" />
-                    内容管理
+                    <Icon type="ios-paper"/>
+                    <span>内容管理</span>
                 </template>
                 <MenuItem name="1-1">文章管理</MenuItem>
                 <MenuItem name="1-2">评论管理</MenuItem>
@@ -21,16 +23,16 @@
             </Submenu>
             <Submenu name="2">
                 <template slot="title">
-                    <Icon type="ios-people" />
-                    用户管理
+                    <Icon type="ios-people"/>
+                    <span>用户管理dddddddddddddddddddddd</span>
                 </template>
                 <MenuItem name="2-1">新增用户</MenuItem>
                 <MenuItem name="2-2">活跃用户</MenuItem>
             </Submenu>
             <Submenu name="3">
                 <template slot="title">
-                    <Icon type="ios-stats" />
-                    统计分析
+                    <Icon type="ios-stats"/>
+                    <span>统计分析</span>
                 </template>
                 <MenuGroup title="使用">
                     <MenuItem name="3-1">新增和启动</MenuItem>
@@ -42,7 +44,13 @@
                     <MenuItem name="3-5">流失用户</MenuItem>
                 </MenuGroup>
             </Submenu>
+            <menu-item name="4">
+                <Icon type="md-alarm"/>
+                <span>待办事项</span>
+            </menu-item>
         </Menu>
+        <!--侧边导航菜单：折叠时候-->
+        <div style="color: white" v-if="isCollapsed">放dropdown和menu图标</div>
     </Sider>
 </template>
 
@@ -53,15 +61,7 @@
             return {
                 isCollapsed: false
             }
-        },
-    computed: {
-        menuitemClasses()
-        {
-            return [
-                this.isCollapsed ? 'collapsed-menu' : ''
-            ]
         }
-    }
     }
 </script>
 
@@ -72,20 +72,31 @@
         display: flex;
         flex-flow: column nowrap;
         height: 100vh;
-        overflow-y: auto;
         z-index: 1;
     }
+
+    .menu {
+        display: flex;
+        flex-flow: column nowrap;
+        transition: all 1s ease-in-out;
+        overflow-y: auto;
+        height: calc(100vh - 64px);
+    }
+
+    .menu::-webkit-scrollbar {
+        display: none;
+    }
+
     .logo {
         display: flex;
+        flex-flow: row nowrap;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         height: 63px;
-        background: #191a23;
         border-bottom: 1px solid #101117;
-    }
-    .menu::-webkit-scrollbar {
-        width: 0;
+        color: #fff;
+        transition: all .5s ease;
     }
 
     .menu span {
@@ -95,26 +106,5 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         vertical-align: bottom;
-        transition: width .2s ease .2s;
     }
-
-    .menu i {
-        transform: translateX(0px);
-        transition: all .2s ease;
-        vertical-align: middle;
-        font-size: 16px;
-    }
-
-    .collapsed-menu span {
-        width: 0;
-        transition: width .2s ease;
-    }
-
-    .collapsed-menu i {
-        transform: translateX(5px);
-        transition: all .2s ease .2s;
-        vertical-align: middle;
-        font-size: 22px;
-    }
-
 </style>
