@@ -1,16 +1,16 @@
 <template>
     <div id="app">
-        <alm-index/>
+        <alm-layout/>
     </div>
 </template>
 
 <script>
-    import AlmIndex from "@/components/AlmIndex";
+    import AlmLayout from "@/components/AlmLayout";
 
     export default {
         name: 'app',
         components: {
-            AlmIndex
+            AlmLayout
         }
     }
 </script>
