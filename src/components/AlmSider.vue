@@ -73,6 +73,7 @@
         flex-flow: column nowrap;
         height: 100vh;
         z-index: 1;
+        box-shadow: 2px 0 3px rgba(0,21,41,.35);
     }
 
     .menu {
