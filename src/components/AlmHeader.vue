@@ -1,5 +1,6 @@
 <template>
     <Header class="header">
+
         <Menu mode="horizontal" theme="light">
             <div class="layout-logo">
             </div>
@@ -34,8 +35,9 @@
 <style scoped>
     .header {
         position: fixed;
-        width: calc(100% - 200px);
         left: 200px;
-        background-color: #fff;
+        width: calc(100% - 200px);
+        background: #fff;
+        padding: 0;
     }
 </style>
