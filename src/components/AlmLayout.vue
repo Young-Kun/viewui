@@ -2,10 +2,10 @@
     <Layout>
         <!--侧边导航-->
         <alm-sider/>
-        <Layout class="layout-inside">
+        <Layout class="layout-inside" :style="{paddingLeft:leftPadding}">
             <!--头部导航-->
             <alm-header/>
-            <Layout class="layout-content">
+            <Layout class="layout-content" :style="{paddingTop:headerHeight}">
                 <!--主体内容-->
                 <main>
                     <alm-content/>
@@ -22,13 +22,19 @@
     import AlmHeader from "@/components/AlmHeader";
     import AlmContent from "@/components/AlmContent";
     import AlmFooter from "@/components/AlmFooter";
+    import { mapState, mapGetters } from 'vuex'
 
     export default {
         name: "AlmLayout",
-        data() {
-            return {
-                siderWidth: '300px'
-            }
+        computed: {
+            ...mapState([
+                "headerHeight",
+                "siderWidth",
+                "collapsedWidth",
+            ]),
+            ...mapGetters([
+                "leftPadding"
+            ])
         },
         components: {
             AlmSider,
@@ -43,11 +49,6 @@
     .layout-inside {
         overflow-x: hidden;
         min-height: 100vh;
-        padding-left: 200px;
-    }
-
-    .layout-content {
-        padding-top: 64px;
     }
 
     main {

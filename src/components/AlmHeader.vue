@@ -1,7 +1,10 @@
 <template>
-    <Header class="header">
-        <div class="header-trigger">
-            <Icon type="md-menu"></icon>
+    <Header class="header" :style="{height: headerHeight, width: 'calc(100% - ' + leftPadding + ')'}">
+        <div class="header-trigger" @click="siderCollapseToggle" v-show="isCollapsed">
+            <Icon type="ios-menu-outline"></icon>
+        </div>
+        <div class="header-trigger" @click="siderCollapseToggle" v-show="!isCollapsed">
+            <Icon type="ios-menu"></icon>
         </div>
         <Menu mode="horizontal" theme="light">
             <MenuItem name="1">
@@ -22,9 +25,9 @@
         </div>
         <div class="header-user">
             <Dropdown>
-                <div style="padding: 0 15px">
+                <div class="user-dropdown">
                     <Icon type="md-person"/>
-                    <span>User</span>
+                    <span>ZhuYangkun</span>
                 </div>
                 <DropdownMenu slot="list">
                     <DropdownItem>修改资料</DropdownItem>
@@ -37,16 +40,31 @@
 </template>
 
 <script>
+    import {mapState, mapActions, mapGetters} from 'vuex'
+
     export default {
-        name: "AlmHeader"
+        name: "AlmHeader",
+        computed: {
+            ...mapState([
+                'headerHeight',
+                "isCollapsed"
+            ]),
+            ...mapGetters([
+                "leftPadding"
+            ])
+        },
+        methods: {
+            ...mapActions([
+                'siderCollapseToggle'
+            ])
+        }
     }
 </script>
 
 <style scoped>
     .header {
         position: fixed;
-        left: 200px;
-        width: calc(100% - 200px);
+        top: 0;
         background: #fff;
         box-shadow: 0 1px 6px rgba(0, 21, 41, .08);
         padding: 0;
@@ -86,11 +104,31 @@
     }
 
     .search-input {
-        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        padding: 0 30px;
     }
 
     .header-user {
+        display: flex;
+        align-items: center;
         margin-left: auto;
-        margin-right: 20px;
+    }
+
+    .header-user i {
+        padding: 0 5px;
+    }
+
+    .header-user span {
+        max-width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 15px;
+    }
+
+    .user-dropdown {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
     }
 </style>

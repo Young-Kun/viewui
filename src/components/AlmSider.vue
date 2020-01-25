@@ -1,9 +1,11 @@
 <template>
     <Sider
             class="sider"
+            :width="siderWidth"
             collapsible
-            :collapsed-width="78"
+            :collapsed-width="collapsedWidth"
             v-model="isCollapsed"
+            hide-trigger
     >
         <!--LOGO-->
         <div class="logo" :style="{fontSize: isCollapsed?'xx-large':'x-large'}">
@@ -55,13 +57,17 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: "AlmSider",
-        data() {
-            return {
-                isCollapsed: false
-            }
-        }
+        computed: {
+            ...mapState([
+                "isCollapsed",
+                "siderWidth",
+                "collapsedWidth"
+            ])
+        },
     }
 </script>
 
@@ -102,7 +108,7 @@
         height: 63px;
         border-bottom: 1px solid #101117;
         color: #fff;
-        transition: all .5s ease;
+        transition: all .3s ease;
     }
 
     .menu span {
